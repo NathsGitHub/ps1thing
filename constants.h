@@ -273,6 +273,10 @@ Object createObject(unsigned char imageData[], int x, int y, int scalex, int sca
 	object.sprite.w = object.tim_data.pw * 2;         // width of sprite
 	object.sprite.h = object.tim_data.ph;             // height of sprite
 
+	object.ture.x = x;
+	object.ture.y = y;
+	object.ture.w = object.sprite.w * scalex;
+	object.ture.h = object.sprite.h * scaley;
 
 	object.sprite.tpage = GetTPage(
 			1,   								// 0=4-bit, 1=8-bit, 2=16-bit
@@ -292,7 +296,7 @@ Object createObject(unsigned char imageData[], int x, int y, int scalex, int sca
 	object.sprite.my = 0;                            // rotation y coord
 	object.sprite.scalex = scalex*ONE;                      // scale x (ONE = 100%)
 	object.sprite.scaley = scaley*ONE;                      // scale y (ONE = 100%)
-	object.objectid = id;                        
+	object.objectid = id;                        // rotation
 
 	return object;
 }
@@ -306,7 +310,7 @@ Image moveImage(Image image, int x, int y) {
 }
 
 Image changeImage(Image image, int u, int v) {
-	image.sprite.u = u+64;
+	image.sprite.u = u+126;
 	image.sprite.v = v;
 	//FntPrint(" U: %d V: %d", u+64, v, "\n");
 	return image;
