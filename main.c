@@ -1,3 +1,4 @@
+
 /*
 * Really basic hello world
 * Thanks to much work from the authors of pcsx-redux 
@@ -7,7 +8,7 @@
 
 //#include <stdio.h>
 //#include <stdbool.h>
-#include "constants.h"
+#include "constants.c"
 #include "animation.h"
 #include "comptext.h"
 
@@ -89,7 +90,7 @@ void walkstart(){
     b = 1;
     setBackgroundColor(createColor(5, 5, 5));
     //line = createLine(createColor(224, 101, 56), 32, 32, 64, 64);
-    vcream = createCharacter(img_tvcreamsprDsheet, 100, 50, 32);
+    vcream = createCharacter(img_vcreamD, 100, 50, 32);
     vcream = changeImage(vcream, 0, 0);
     
 }
@@ -97,7 +98,7 @@ void walkstart(){
 void computerstart(){
     b = 1;
     setBackgroundColor(createColor(255, 5, 5));
-    bootup = createImage(img_veggspr, 150, 100, 1, 1, 0);
+    bootup = createImage(img_Fveggspr, 150, 100, 1, 1, 0);
 
     
 }
@@ -302,6 +303,7 @@ void update(void) {
             newscreen = true;
             vcream.ture.y = -32;
             mapposy += 1;
+            
         }
         if(vcream.ture.y < -32) {
             newscreen = true;
@@ -310,6 +312,10 @@ void update(void) {
         }
         
         if(newscreen){
+            for(c = 0; c <= 5; c++){
+                moveObject(object[c], 400, 0);
+                FntPrint(" X: %d Y: %d", mapposx, mapposy, "\n");
+            }
             //Hallways
             if(mapposx == 3 && mapposy == 0){
                 
@@ -317,16 +323,21 @@ void update(void) {
                 wall[0] = createImage(img_wallhorz, 0, 128, 3, 4, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[2] = createImage(img_wallvert, 290, 0, 1, 6, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0); 
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 0){
                 newscreen = false;
-                FntPrint("newroom");
+                
                 wall[0] = createImage(img_wallhorz, 220, 128, 2, 4, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[2] = createImage(img_wallvert, 0, 0, 3, 6, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(img_vsurgespr, 100, 90, 1, 1, 1); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_Fvsurge, 100, 90, 1, 1, 1); 
                 object[1] = createObject(img_eggpcU, 200, 100, 1, 1, 2);
                 object[2] = createObject(img_eggpcU, 150, 80, 1, 1, 0);
                 object[3] = createObject(img_eggpcU, 150, 60, 1, 1, 0);
@@ -335,282 +346,478 @@ void update(void) {
 
             }else if(mapposx == 2 && mapposy == 0){
                 newscreen = false;
+                FntPrint("newroom");
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 0, 0, 0, 0, 0); 
-                object[1] = createObject(NULL, 0, 0, 0, 0, 0);
-                object[2] = createObject(NULL, 0, 0, 0, 0, 0);
-                object[3] = createObject(NULL, 0, 0, 0, 0, 0);
-                object[4] = createObject(NULL, 0, 0, 0, 0, 0);
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 200, 50, 1, 1, 2);
             }else if(mapposx == 1 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(img_veggspr, 100, 100, 1, 1, 0);
-                object[1] = createObject(NULL, 0, 0, 0, 0, 0); 
+                // wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_Fveggspr, 100, 100, 1, 1, 3);
+                object[1] = createObject(img_eggpcU, 200, 100, 1, 1, 2);
+                object[2] = createObject(img_eggpcU, 150, 80, 1, 1, 0);
+                object[3] = createObject(img_eggpcU, 150, 60, 1, 1, 0);
+                object[4] = createObject(img_eggpcU, 200, 50, 1, 1, 2);
+
             }else if(mapposx == 1 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                wall[3] = createImage(img_wallhorz, 300, 0, 1, 1, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                wall[3] = createImage(img_wallhorz, 300, 0, 1, 1, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                wall[3] = createImage(img_wallhorz, 300, 0, 1, 1, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                wall[3] = createImage(img_wallhorz, 300, 0, 1, 1, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 220, 0, 4, 2, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 220, 180, 4, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 3, 6, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 290, 0, 1, 1, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 7 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[1] = createImage(img_wallhorz, 0, 128, 6, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 128, 3, 4, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[2] = createImage(img_wallvert, 290, 0, 1, 6, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 6, 6, 0);
                 wall[1] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 3, 2, 0);
                 wall[2] = createImage(img_wallvert, 290, 0, 1, 6, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 7 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 6, 4, 0);
                 wall[2] = createImage(img_wallvert, 220, 0, 4, 6, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[1] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 220, 180, 4, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 5){
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 3, 1, 0);
                 wall[1] = createImage(img_wallhorz, 220, 0, 4, 2, 0);
                 wall[2] = createImage(img_wallvert, 0, 180, 3, 1, 0);
                 wall[3] = createImage(img_wallhorz, 220, 180, 4, 2, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 7 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallvert, 0, 180, 3, 1, 0);
                 wall[2] = createImage(img_wallhorz, 220, 180, 4, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 6){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 3, 1, 0);
                 wall[1] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 7 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 180, 6, 3, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 1, 0);
                 wall[2] = createImage(img_wallhorz, 220, 0, 4, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0);  
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
             }else if(mapposx == 5 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallhorz, 0, 0, 6, 2, 0);
                 wall[1] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 7 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 0, 0, 3, 1, 0);
                 wall[1] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 1 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 1, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 180, 6, 2, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 220, 0, 4, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 3, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                //wall[3] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }
             //Rooms
             else if(mapposx == 4 && mapposy == 0){
@@ -619,147 +826,252 @@ void update(void) {
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 0){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 0){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 0 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 7){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 8){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 8 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 4 && mapposy == 9){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 9){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 9 && mapposy == 1){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 9 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 0, 0, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 5 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 6 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 0, 0, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 9){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 3 && mapposy == 9){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }
             //Cells
             else if(mapposx == 0 && mapposy == 2){
@@ -768,7 +1080,7 @@ void update(void) {
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(img_vsurgespr, 100, 90, 1, 1, 1); 
+                object[0] = createObject(img_Fvsurge, 100, 90, 1, 1, 1); 
                 object[1] = createObject(img_eggpcU, 200, 100, 1, 1, 2);
                 object[2] = createObject(img_eggpcU, 150, 80, 1, 1, 0);
                 object[3] = createObject(img_eggpcU, 150, 60, 1, 1, 0);
@@ -779,49 +1091,84 @@ void update(void) {
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 0 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 0 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 0, 0, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 1, 6, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 0, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 0, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 2){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 3){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 4){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }else if(mapposx == 2 && mapposy == 5){
                 newscreen = false;
                 wall[0] = createImage(img_wallvert, 290, 0, 1, 6, 0);
                 wall[1] = createImage(img_wallvert, 0, 0, 0, 0, 0);
                 wall[2] = createImage(img_wallhorz, 0, 0, 6, 1, 0);
                 wall[3] = createImage(img_wallhorz, 0, 210, 6, 1, 0);
-                object[0] = createObject(NULL, 100, 100, 0, 0, 0); 
+                object[0] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[1] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[2] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[3] = createObject(img_eggpcU, 300, 0, 1, 1, 0); 
+                object[4] = createObject(img_eggpcU, 300, 0, 1, 1, 0);
             }
         }
         struct Point l1 = { vcream.ture.x, vcream.ture.y }, r1 = { vcream.ture.x+vcream.ture.w, vcream.ture.y+vcream.ture.h };

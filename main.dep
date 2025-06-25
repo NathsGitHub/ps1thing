@@ -1,4 +1,5 @@
-main.o: main.c constants.h ../third_party/psyq/include/STDLIB.H \
+main.o: main.c constants.c constants.h \
+ ../third_party/psyq/include/STDLIB.H \
  ../third_party/psyq/include/stddef.h ../third_party/psyq/include/abs.h \
  ../third_party/psyq/include/convert.h \
  ../third_party/psyq/include/malloc.h ../third_party/psyq/include/qsort.h \
